@@ -3,3 +3,6 @@ this is not really any project, i will be prototyping and testing code related t
 
 
 currently prototyping a section of code that i saw in a RTL-SDR linux drivers code that i found here https://github.com/smdaa/sdr. in which i struggle to understand, so im trying to make mines.
+
+
+currently i have to solve the SEGV error, i did commit now since i cant spend more time for now.
