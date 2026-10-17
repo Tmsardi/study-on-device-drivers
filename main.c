@@ -7,8 +7,8 @@
 #include <string.h>
 
 #define SYS_USB "/sys/bus/usb/devices"
-#define IDPRODUCT "07dc"
-#define IDVENDOR "8087"
+#define IDPRODUCT "0092"
+#define IDVENDOR "0f0d"
 
 
 int read_value(char* in);
@@ -73,6 +73,7 @@ int read_value(char* in)
 	
 	snprintf(CmpValue, sizeof(CmpValue), "%s%s%c", IDPRODUCT, IDVENDOR, '\0');
 
+	printf("%s", CmpValue);
 
 	snprintf(Path_idProduct, sizeof(Path_idProduct),
 			"%s/%s/idProduct",SYS_USB, in);
@@ -125,24 +126,28 @@ int read_value(char* in)
 
 	Temp[4] = '\0';
 
-	printf("	idVector: %s\n", Temp);
+	printf("	idVendor: %s\n", Temp);
 
 
 
 
 	strcpy(&CmpBuf[4], Temp);
-	CmpBuf[9] = '\0';
+
+
+
+	//  CmpBuf[9] = '\0';
 
 
 
 
 	printf("	CmpBuf: %s\n", CmpBuf);
+	printf("%s \n ", CmpValue);
 	
 
-	if((strcmp(CmpBuf, CmpValue)) == 0)
-		printf("El dispositivo esta conectado en el puerto %s", in);
+	if((memcmp(&CmpBuf[0], &CmpValue[0], 8)) == 0)
+		printf("\n\nEl dispositivo esta conectado en el puerto %s\n\n", in);
 
-	printf("la diferencia es %i\n", strcmp(CmpBuf, CmpValue));
+	printf("la diferencia es %i\n", strcmp(&CmpBuf[0], &CmpValue[0]));
 
 
 	fclose(Pfp);
